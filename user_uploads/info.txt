@@ -1,0 +1,1 @@
+Here the user's folder will be created which contains the genertation process info

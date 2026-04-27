@@ -4,7 +4,7 @@ static/reels/*mp4
 static/songs/*mp3
 !static/songs/.gitkeep
 
-user_uploads/*
+
 !user_uploads/.gitkeep
 
 
