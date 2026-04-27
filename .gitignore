@@ -1,16 +1,14 @@
-*zip
-*jpeg
-*jpg
-*png
-*mp4
-*avi
-*mov
-*mp3
-*webp
-*txt
+static/reels/*mp4
+!static/reels/.gitkeep
 
-config.py
+static/songs/*mp3
+!static/songs/.gitkeep
 
+user_uploads/*
 !user_uploads/.gitkeep
-!static/.gitkeep
-!templates/.gitkeep
+
+
+*zip
+
+# Config
+config.py
