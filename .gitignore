@@ -1,0 +1,13 @@
+*zip
+*jpeg
+*jpg
+*png
+*mp4
+*avi
+*mov
+*mp3
+*webp
+
+config.py
+
+user_uploads/*
