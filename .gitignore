@@ -1,11 +1,8 @@
-static/reels/*mp4
-!static/reels/.gitkeep
-
-static/songs/*mp3
-!static/songs/.gitkeep
-
-
-!user_uploads/.gitkeep
+*mp4
+*mp3
+*jpg
+*png
+*webp
 
 
 *zip
