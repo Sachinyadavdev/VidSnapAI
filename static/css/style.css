@@ -13,25 +13,79 @@ body {
 
 /* Navbar Styles */
 .navbar {
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
     padding: 1rem 2rem;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.shadow-sm {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 }
 
 .navbar-brand {
-    color: white !important;
-    font-weight: bold;
+    color: var(--primary-color) !important;
+    font-weight: 700;
     font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    
+}
+
+.navbar-toggler {
+    border-color: rgba(64, 93, 230, 0.18);
+}
+
+.navbar-toggler-icon {
+    background-image: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+}
+
+.navbar-toggler-icon::before {
+    content: '\2630';
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin: 0 1rem;
-    transition: color 0.3s ease;
+    color: rgba(15, 23, 42, 0.85) !important;
+    margin: 0 0.75rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    font-weight: 500;
 }
 
-.nav-link:hover {
-    color: white !important;
+.nav-link:hover,
+.nav-link:focus {
+    background: rgba(64, 93, 230, 0.08);
+    color: var(--primary-color) !important;
+    transform: translateY(-1px);
 }
+
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 991px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-link {
+        margin: 0.35rem 0;
+    }
+}
+
 
 .main-content {
     flex: 1;
