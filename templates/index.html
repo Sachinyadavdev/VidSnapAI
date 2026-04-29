@@ -13,6 +13,21 @@
 
 <section class="features-section">
     <div class="container">
+        <div class="section-header text-center mb-2">
+            
+            <h2 class="showcase-title">Recent Reels Created</h2>
+            <p class="section-subtitle pb-3">Live preview of the reels currently available in the gallery.</p>
+        </div>
+        {% if reels %}
+        <div class="featured-gallery-grid">
+            {% for reel in reels %}
+            <div class="gallery-card">
+                <video src="{{ url_for('static', filename='reels/' ~ reel) }}" controls muted playsinline></video>
+                <div class="gallery-card-title">{{ reel|replace('.mp4', '') }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="feature-card">
@@ -36,20 +51,10 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
 
-<section class="showcase-section">
-    <div class="container">
-        <h2 class="showcase-title">Featured Creations</h2>
-        <div class="image-grid">
-            <img src="{{ url_for('static', filename='1.jpg') }}" alt="Reel Example 1" class="showcase-image">
-            <img src="{{ url_for('static', filename='2.jpg') }}" alt="Reel Example 2" class="showcase-image">
-            <img src="{{ url_for('static', filename='3.jpg') }}" alt="Reel Example 3" class="showcase-image">
-            <img src="{{ url_for('static', filename='4.jpg') }}" alt="Reel Example 4" class="showcase-image">
-            <img src="{{ url_for('static', filename='5.jpg') }}" alt="Reel Example 5" class="showcase-image">
-        </div>
-    </div>
-</section>
+
 {% endblock %}
  

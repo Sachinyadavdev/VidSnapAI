@@ -12,7 +12,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    reels = os.listdir("static/reels") if os.path.exists("static/reels") else []
+    return render_template("index.html", reels=reels)
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
