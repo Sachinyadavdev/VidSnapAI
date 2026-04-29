@@ -1,4 +1,4 @@
-# VidSnapAI
+# ReelsAI
 
 VidSnapAI is a Flask-based web app for generating vertical video reels from uploaded images and text. The app converts your text into spoken audio using the ElevenLabs API, then combines the selected images, narration, optional music, and transitions into a final MP4 reel using FFmpeg.
 
