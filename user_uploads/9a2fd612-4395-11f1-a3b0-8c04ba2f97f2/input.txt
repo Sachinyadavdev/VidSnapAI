@@ -1,0 +1,13 @@
+file 'pexels-lukas-arianto-152146011-14155952.jpg'
+duration 1
+file 'pexels-abdullah-asad-154796132-12510742.jpg'
+duration 1
+file 'pexels-sahil-miyani-731749225-35867832.jpg'
+duration 1
+file 'pexels-hemildhanani-12892508.jpg'
+duration 1
+file 'pexels-daiatreilang-synnah-257779876-16770631.jpg'
+duration 1
+file 'pexels-cottonbro-6626361.jpg'
+duration 1
+file 'pexels-cottonbro-6626361.jpg'

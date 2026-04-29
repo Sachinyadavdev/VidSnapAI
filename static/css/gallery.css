@@ -58,10 +58,9 @@
 
 .reel-media video {
     width: 100%;
+    aspect-ratio: 9 / 16;
     height: auto;
-    min-height: 240px;
-    max-height: 450px;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     background: #000;
 }

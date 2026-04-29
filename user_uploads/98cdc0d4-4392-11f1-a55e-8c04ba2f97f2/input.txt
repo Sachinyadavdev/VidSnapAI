@@ -1,0 +1,11 @@
+file 'Hareeesh.png'
+duration 1
+file 'Lakshmi.png'
+duration 1
+file 'Picture1.png'
+duration 1
+file 'ramya.png'
+duration 1
+file 'sangeetha.jpg'
+duration 1
+file 'sangeetha.jpg'

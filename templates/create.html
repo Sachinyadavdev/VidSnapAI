@@ -10,8 +10,27 @@
 <section class="upload-section" style="margin-top: 5rem;">
     <div class="container">
         <div class="upload-container">
-            <h1 class="upload-title">Create Your Reel</h1>
+            <h1 class="upload-title"><i class="fas fa-wand-magic-sparkles"></i> Create Your Reel</h1>
             <p class="upload-instructions">Upload your image files to create an amazing reel. You can select multiple images at once.</p>
+
+            {% if created_reel %}
+                <div class="creation-status success">
+                    <div class="status-icon"><i class="fas fa-check"></i></div>
+                    <div>
+                        <h2>Reel has been created</h2>
+                        <p>Your reel is ready. Check it on the gallery page.</p>
+                    </div>
+                    <a href="/gallery" class="gallery-pop-button">Go to Gallery</a>
+                </div>
+            {% elif create_error %}
+                <div class="creation-status error">
+                    <div class="status-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <div>
+                        <h2>Reel creation failed</h2>
+                        <p>{{ create_error }}</p>
+                    </div>
+                </div>
+            {% endif %}
             
             <form action="/create" enctype="multipart/form-data" method="post" class="dropzone" id="myDropzone" >
                 <div class="fallback">
@@ -27,10 +46,56 @@
                 <div class="text-input-container">
                     <textarea class="text-input" id="textInput" name="text" placeholder="Enter your text to be added as voice here..." rows="4"></textarea>
                 </div>
+
+                <div class="transition-picker">
+                    <label class="music-field-label" for="transitionAnimation">Image Transition</label>
+                    <select class="music-select" id="transitionAnimation" name="transition_animation">
+                        {% for value, label in transitions.items() %}
+                            <option value="{{ value }}" {% if value == 'fade' %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="music-picker">
+                    <div class="music-picker-header">
+                        <div>
+                            <h2>Background Music</h2>
+                            <p>Choose a track and set how loud it should be in the final reel.</p>
+                        </div>
+                        <span class="music-volume-value" id="musicVolumeValue">35%</span>
+                    </div>
+
+                    <label class="music-field-label" for="backgroundMusic">Track</label>
+                    <select class="music-select" id="backgroundMusic" name="background_music">
+                        <option value="">No background music</option>
+                        {% for song in songs %}
+                            <option value="{{ song }}">{{ song|replace('_', ' ')|replace('.mp3', '') }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="music-controls">
+                        <label class="music-field-label" for="musicVolume">Volume</label>
+                        <input class="music-volume" id="musicVolume" name="music_volume" type="range" min="0" max="1" step="0.05" value="0.35">
+                    </div>
+
+                    <audio class="music-preview" id="musicPreview" controls preload="metadata"></audio>
+                </div>
                 
                 <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-clapperboard"></i>
                     Create Reel
                 </button>
+
+                <div class="processing-message" id="processingMessage" aria-live="polite">
+                    <div class="processing-icon">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div>
+                        <h2>Reel is processing</h2>
+                        <p>Your reel is being generated in the background. It will appear in the gallery once it is ready.</p>
+                    </div>
+                    <a href="/gallery" class="gallery-pop-button">Go to Gallery</a>
+                </div>
             </form>
         </div>
     </div>
@@ -42,6 +107,13 @@
     let selectedFiles = [];
     const fileInput = document.getElementById('fileInput');
     const filePreview = document.getElementById('filePreview');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const musicPreview = document.getElementById('musicPreview');
+    const musicVolume = document.getElementById('musicVolume');
+    const musicVolumeValue = document.getElementById('musicVolumeValue');
+    const createForm = document.getElementById('myDropzone');
+    const submitBtn = document.getElementById('submitBtn');
+    const processingMessage = document.getElementById('processingMessage');
 
     function handleFiles(files) {
         selectedFiles = Array.from(files);
@@ -75,8 +147,39 @@
         fileInput.files = dataTransfer.files;
     }
 
+    function updateMusicPreview() {
+        const selectedTrack = backgroundMusic.value;
+
+        if (!selectedTrack) {
+            musicPreview.removeAttribute('src');
+            musicPreview.load();
+            musicPreview.style.display = 'none';
+            return;
+        }
+
+        musicPreview.src = `/static/songs/${encodeURIComponent(selectedTrack)}`;
+        musicPreview.volume = Number(musicVolume.value);
+        musicPreview.style.display = 'block';
+    }
+
+    function updateMusicVolume() {
+        const volume = Number(musicVolume.value);
+        musicPreview.volume = volume;
+        musicVolumeValue.textContent = `${Math.round(volume * 100)}%`;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         renderSelectedFiles();
+        updateMusicVolume();
+        updateMusicPreview();
+        backgroundMusic.addEventListener('change', updateMusicPreview);
+        musicVolume.addEventListener('input', updateMusicVolume);
+
+        createForm.addEventListener('submit', () => {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            processingMessage.classList.add('is-visible');
+        });
     });
 </script>
 {% endblock %} 

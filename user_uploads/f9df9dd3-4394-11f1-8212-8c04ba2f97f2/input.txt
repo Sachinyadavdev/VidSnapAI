@@ -1,0 +1,11 @@
+file 'Screenshot_2026-04-13_112601.png'
+duration 1
+file 'Screenshot_2026-04-13_114016.png'
+duration 1
+file 'Screenshot_2026-04-13_172400.png'
+duration 1
+file 'Screenshot_2026-04-13_172754.png'
+duration 1
+file 'Screenshot_2026-04-13_174204.png'
+duration 1
+file 'Screenshot_2026-04-13_174204.png'

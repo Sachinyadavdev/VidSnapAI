@@ -1,0 +1,9 @@
+file 'Adhithya.jpg'
+duration 1
+file 'Hareeesh.png'
+duration 1
+file 'Lakshmi.png'
+duration 1
+file 'lawrence.jpg'
+duration 1
+file 'lawrence.jpg'

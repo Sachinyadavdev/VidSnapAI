@@ -190,7 +190,7 @@ footer {
 
 .gallery-card video {
     width: 100%;
-    min-height: 220px;
+    min-height: 280px;
     object-fit: cover;
     display: block;
 }
@@ -200,6 +200,33 @@ footer {
     font-weight: 600;
     color: #212529;
     text-align: center;
+}
+
+.gallery-link-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.gallery-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.gallery-link-button:hover,
+.gallery-link-button:focus {
+    background: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
 }
 
 .section-header {

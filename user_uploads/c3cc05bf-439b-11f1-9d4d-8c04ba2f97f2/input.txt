@@ -1,0 +1,7 @@
+file 'IMG_7389.JPG.jpeg'
+duration 1
+file 'MaryBrunstPhoto-1270-Edit-Copy1.jpg'
+duration 1
+file 'kpc_founder_image3_1.jpg'
+duration 1
+file 'kpc_founder_image3_1.jpg'
