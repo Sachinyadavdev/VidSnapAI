@@ -23,22 +23,29 @@ def create():
         rec_id = request.form.get("uuid")
         desc = request.form.get("text")
         input_files = []
-        for key, value in request.files.items():
-            print(key, value)
-            # Upload the file
-            file = request.files[key]
-            if file:
+
+        files = request.files.getlist('files')
+        if not files:
+            for key in request.files:
+                files.extend(request.files.getlist(key))
+
+        for file in files:
+            if file and file.filename:
                 filename = secure_filename(file.filename)
-                if(not(os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], rec_id)))):
-                    os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], rec_id))
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], rec_id,  filename))
-                input_files.append(file.filename)
+                upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], rec_id)
+                if not os.path.exists(upload_dir):
+                    os.mkdir(upload_dir)
+                file.save(os.path.join(upload_dir, filename))
+                input_files.append(filename)
                 print(file.filename)
-            # Capture the description and save it to a file
-            with open(os.path.join(app.config['UPLOAD_FOLDER'], rec_id, "desc.txt"), "w") as f:
-                f.write(desc)
+
+        if not os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], rec_id)):
+            os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], rec_id))
+        with open(os.path.join(app.config['UPLOAD_FOLDER'], rec_id, "desc.txt"), "w") as f:
+            f.write(desc)
+
         for fl in input_files:
-            with open(os.path.join(app.config['UPLOAD_FOLDER'], rec_id,  "input.txt"), "a") as f:
+            with open(os.path.join(app.config['UPLOAD_FOLDER'], rec_id, "input.txt"), "a") as f:
                 f.write(f"file '{fl}'\nduration 1\n")
 
 

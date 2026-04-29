@@ -8,12 +8,34 @@
 
 {% block content %}
 <div class="container gallery-container" style="margin-top: 5rem;">
-    <h1 class="gallery-title">Reel Gallery</h1>
-    <div class="gallery-grid">
-        {% for reel in reels %}
-            <video src="/static/reels/{{reel}}" controls></video>
-        {% endfor %}
- 
+    <div class="gallery-header text-center">
+        <span class="section-label">Your Reels</span>
+        <h1 class="gallery-title">Reel Gallery</h1>
+        <p class="gallery-subtitle">Browse your AI-generated reels in a responsive gallery with clean cards and easy playback.</p>
+        {% if reels|length %}
+            <div class="gallery-stats">{{ reels|length }} reel{{ 's' if reels|length != 1 else '' }} available</div>
+        {% endif %}
     </div>
+
+    {% if reels %}
+        <div class="gallery-grid">
+            {% for reel in reels %}
+                <article class="gallery-item reel-card">
+                    <div class="reel-media">
+                        <video src="/static/reels/{{ reel }}" controls preload="metadata"></video>
+                    </div>
+                    <div class="reel-info">
+                        <h3>{{ reel }}</h3>
+                       
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No reels have been generated yet. Create a new reel to see it appear here.</p>
+            <a href="/create" class="btn btn-primary mt-3">Create a Reel</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %} 

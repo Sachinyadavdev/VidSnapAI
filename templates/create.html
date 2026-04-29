@@ -11,18 +11,17 @@
     <div class="container">
         <div class="upload-container">
             <h1 class="upload-title">Create Your Reel</h1>
-            <p class="upload-instructions">Upload your video files to create an amazing reel. You can upload multiple files.</p>
+            <p class="upload-instructions">Upload your image files to create an amazing reel. You can select multiple images at once.</p>
             
             <form action="/create" enctype="multipart/form-data" method="post" class="dropzone" id="myDropzone" >
                 <div class="fallback">
                     <div id="fileInputs">
                         <div class="file-input-group">
-                            <input name="file1" type="file" class="file-input" />
+                            <input id="fileInput" name="files" type="file" class="file-input" accept="image/*" multiple onchange="handleFiles(this.files)" />
                             <input name="uuid" type="hidden" value="{{myid}}">
-                            <button type="button" class="remove-file-btn" onclick="removeFileInput(this)" disabled>×</button>
                         </div>
+                        <div id="filePreview" class="file-preview"></div>
                     </div>
-                    <button type="button" class="add-file-btn" onclick="addFileInput()">+ Add File</button>
                 </div>
                 
                 <div class="text-input-container">
@@ -40,23 +39,44 @@
 
 {% block extra_js %}
 <script>
-    let fileCounter = 2; // Start from 2 since we already have file1
+    let selectedFiles = [];
+    const fileInput = document.getElementById('fileInput');
+    const filePreview = document.getElementById('filePreview');
 
-    function addFileInput() {
-        const fileInputs = document.getElementById('fileInputs');
-        const newFileInput = document.createElement('div');
-        newFileInput.className = 'file-input-group';
-        newFileInput.innerHTML = `
-            <input name="file${fileCounter}" type="file" class="file-input" />
-            <button type="button" class="remove-file-btn" onclick="removeFileInput(this)">×</button>
-        `;
-        fileInputs.appendChild(newFileInput);
-        fileCounter++;
+    function handleFiles(files) {
+        selectedFiles = Array.from(files);
+        renderSelectedFiles();
     }
 
-    function removeFileInput(button) {
-        const fileInputGroup = button.parentElement;
-        fileInputGroup.remove();
+    function renderSelectedFiles() {
+        if (selectedFiles.length === 0) {
+            filePreview.innerHTML = '<p class="file-preview-empty">No images selected.</p>';
+            return;
+        }
+
+        filePreview.innerHTML = selectedFiles.map((file, index) => `
+            <div class="selected-file-item">
+                <span class="selected-file-name">${file.name}</span>
+                <button type="button" class="remove-file-btn" onclick="removeSelectedFile(${index})" aria-label="Remove ${file.name}">×</button>
+            </div>
+        `).join('');
+        updateFileInput();
     }
+
+    function removeSelectedFile(index) {
+        selectedFiles.splice(index, 1);
+        updateFileInput();
+        renderSelectedFiles();
+    }
+
+    function updateFileInput() {
+        const dataTransfer = new DataTransfer();
+        selectedFiles.forEach(file => dataTransfer.items.add(file));
+        fileInput.files = dataTransfer.files;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderSelectedFiles();
+    });
 </script>
 {% endblock %} 

@@ -23,7 +23,7 @@ body {
     background: rgba(255, 255, 255, 0.80);
     backdrop-filter: blur(18px);
     border: 1px solid rgba(15, 23, 42, 0.08);
-    padding: 0.85rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
 }
 
@@ -68,7 +68,7 @@ body {
     padding: 0.5rem 0.85rem;
     border-radius: 999px;
     transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .nav-link:hover,

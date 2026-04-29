@@ -150,6 +150,36 @@
     margin-bottom: 15px;
 }
 
+.file-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.selected-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+}
+
+.selected-file-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-preview-empty {
+    color: #666;
+    font-size: 0.95rem;
+}
+
 /* Style for the file input when a file is selected */
 .file-input:not(:placeholder-shown) {
     border-color: #4CAF50;
