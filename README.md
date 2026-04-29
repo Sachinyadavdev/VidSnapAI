@@ -24,10 +24,8 @@ Install the Python dependencies with:
 ```powershell
 python -m venv venv
 venv\Scripts\Activate.ps1
-pip install flask elevenlabs
+pip install -r requirements.txt
 ```
-
-> Note: There is no `requirements.txt` file in this repo yet, so dependencies are installed manually.
 
 ## Configuration
 
@@ -41,13 +39,19 @@ Optionally, add new audio files to `static/songs` to make them available as back
 
 ## Running the App
 
-From the project root:
+From the project root, start the Flask server:
 
 ```powershell
-python config.py
+python main.py
 ```
 
-Then open the app in your browser at:
+Then, in a second terminal, optionally start the background generation worker:
+
+```powershell
+python generate_process.py
+```
+
+Open the app in your browser at:
 
 ```
 http://127.0.0.1:5000
