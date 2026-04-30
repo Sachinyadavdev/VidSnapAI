@@ -1,0 +1,11 @@
+file 'Gemini_Generated_Image_uddj1vuddj1vuddj.png'
+duration 1
+file 'Gemini_Generated_Image_muaxm5muaxm5muax.png'
+duration 1
+file 'Cable-tie-cases.png'
+duration 1
+file 'Cable-tie-casses.png'
+duration 1
+file 'Terminals_-Products.png'
+duration 1
+file 'Terminals_-Products.png'
